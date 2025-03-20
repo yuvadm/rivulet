@@ -1,0 +1,16 @@
+[project]
+name = "rivulet"
+version = "0.1.0"
+description = "Elegant asynchronous data streams"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    {name = "Yuval Adam", email = "_@yuv.al"},
+]
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.24.0",
+]

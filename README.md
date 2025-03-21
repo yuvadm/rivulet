@@ -1,18 +1,22 @@
 # Rivulet
 
-Elegant asynchronous data streams
+Lightweight asynchronous data streams
 
 ```python
-from rivulet import BatchProcessor
-
-async def item_stream():
-    for i in range(10):
-        yield i
-        await asyncio.sleep(0.1)
+from rivulet import Pipeline, Batch
 
 async def main():
-    processor = BatchProcessor(batch_size=3, timeout_seconds=0.5)
-    
-    async for batch in processor.process(item_stream()):
-        print(f"Processing batch of {len(batch)} items: {batch}")
+    pipe = Pipeline(source())
+    pipe.add_step(double)
+
+    batch = Batch(N=5, timeout=0.1)
+    pipe.add_step(batch)
+    pipe.add_step(sum)
+
+    # run the pipeline
+    async for out in pipe:
+        print(out)
+
+    # or collect them all
+    res = await pipe.collect()
 ```

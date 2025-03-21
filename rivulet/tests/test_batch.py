@@ -1,14 +1,14 @@
 import asyncio
 import pytest
 
-from ..batch import Batch  # Update with your actual import
+from ..batch import Batch
 
 
 class TestBatch:
     @pytest.mark.asyncio
     async def test_batch_by_size(self):
         # Test batching by size
-        batch_processor = Batch[int](N=3, timeout=10.0)  # Long timeout
+        batch_processor = Batch[int](N=3, timeout=10)  # Long timeout
 
         async def source():
             for i in range(8):  # 8 items should produce 2 full batches and 1 partial

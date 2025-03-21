@@ -1,6 +1,16 @@
 # Rivulet
 
-Lightweight asynchronous data streams
+Lightweight asynchronous data streams.
+
+## Installation
+
+Package is not currently published, use directly from source:
+
+```bash
+$ uv add git+https://github.com/yuvadm/rivulet.git
+```
+
+## Usage
 
 ```python
 from rivulet import Pipeline, Batch

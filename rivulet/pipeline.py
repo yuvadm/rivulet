@@ -12,12 +12,14 @@ class Pipeline:
     Each step is a function that takes an async generator and returns a new async generator.
     """
 
-    def __init__(self, source: AsyncGenerator[Any, None]):
+    def __init__(self, source: AsyncGenerator[Any, None], *steps):
         """Initialize the pipeline with a source async generator."""
         self.source = source
         self.steps: List[
             Callable[[AsyncGenerator[Any, None]], AsyncGenerator[Any, None]]
         ] = []
+        for step in steps:
+            self.add_step(step)
 
     def add_step(
         self,

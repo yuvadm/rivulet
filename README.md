@@ -27,8 +27,8 @@ async def main():
     async for out in pipe:
         print(out)
 
-    # or collect them all
-    res = await pipe.collect()
+    # or just single line it and collect them all
+    res = await Pipeline(source(), double, batch, sum).collect()
 ```
 
 ## License

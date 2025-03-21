@@ -79,6 +79,24 @@ async def test_empty_pipeline():
 
 
 @pytest.mark.asyncio
+async def test_pipeline_init_steps():
+    """Test pipeline with steps init in constructor"""
+
+    async def source():
+        yield "test"
+
+    async def dupe(gen):
+        async for value in gen:
+            for _ in range(3):
+                yield value
+
+    pipeline = Pipeline(source(), dupe, dupe)
+    results = await pipeline.collect()
+
+    assert results == ["test"] * 9
+
+
+@pytest.mark.asyncio
 async def test_pipeline_with_filtering():
     """Test pipeline with a transformation that filters values"""
 

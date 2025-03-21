@@ -1,16 +1,14 @@
 import asyncio
 import pytest
 
-from ..batch import BatchProcessor  # Update with your actual import
+from ..batch import Batch  # Update with your actual import
 
 
-class TestBatchProcessor:
+class TestBatch:
     @pytest.mark.asyncio
     async def test_batch_by_size(self):
         # Test batching by size
-        batch_processor = BatchProcessor[int](
-            batch_size=3, timeout_seconds=10.0
-        )  # Long timeout
+        batch_processor = Batch[int](N=3, timeout=10.0)  # Long timeout
 
         async def source():
             for i in range(8):  # 8 items should produce 2 full batches and 1 partial
@@ -28,9 +26,7 @@ class TestBatchProcessor:
     @pytest.mark.asyncio
     async def test_batch_by_timeout(self):
         # Test batching by timeout
-        batch_processor = BatchProcessor[int](
-            batch_size=10, timeout_seconds=0.2
-        )  # Small timeout
+        batch_processor = Batch[int](N=10, timeout=0.2)  # Small timeout
 
         async def slow_source():
             for i in range(5):
@@ -49,7 +45,7 @@ class TestBatchProcessor:
     @pytest.mark.asyncio
     async def test_empty_source(self):
         # Test with empty source
-        batch_processor = BatchProcessor[int](batch_size=3, timeout_seconds=0.5)
+        batch_processor = Batch[int](N=3, timeout=0.5)
 
         async def empty_source():
             if False:  # Never yields
@@ -64,7 +60,7 @@ class TestBatchProcessor:
     @pytest.mark.asyncio
     async def test_exact_batch_size(self):
         # Test with source that produces exactly one full batch
-        batch_processor = BatchProcessor[int](batch_size=3, timeout_seconds=0.5)
+        batch_processor = Batch[int](N=3, timeout=0.5)
 
         async def exact_source():
             for i in range(3):
@@ -84,7 +80,7 @@ class TestBatchProcessor:
             def __init__(self, value):
                 self.value = value
 
-        batch_processor = BatchProcessor[TestItem](batch_size=2, timeout_seconds=0.5)
+        batch_processor = Batch[TestItem](N=2, timeout=0.5)
 
         async def object_source():
             for i in range(3):
@@ -101,7 +97,7 @@ class TestBatchProcessor:
     @pytest.mark.asyncio
     async def test_concurrent_items(self):
         # Test with items arriving close together but processed in batches
-        batch_processor = BatchProcessor[int](batch_size=5, timeout_seconds=0.3)
+        batch_processor = Batch[int](N=5, timeout=0.3)
 
         async def concurrent_source():
             # Produce items quickly

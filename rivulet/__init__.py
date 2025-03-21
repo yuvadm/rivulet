@@ -1,3 +1,4 @@
-from .batch import BatchProcessor
+from .batch import Batch
+from .pipeline import Pipeline
 
-__all__ = [BatchProcessor]
+__all__ = [Batch, Pipeline]

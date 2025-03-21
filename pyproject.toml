@@ -3,10 +3,11 @@ name = "rivulet"
 version = "0.1.0"
 description = "Lightweight asynchronous data streams"
 readme = "README.md"
-requires-python = ">=3.8"
+license = "MIT"
 authors = [
     {name = "Yuval Adam", email = "_@yuv.al"},
 ]
+requires-python = ">=3.8"
 dependencies = []
 
 [dependency-groups]

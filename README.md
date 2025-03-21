@@ -30,3 +30,7 @@ async def main():
     # or collect them all
     res = await pipe.collect()
 ```
+
+## License
+
+[MIT](LICENSE)

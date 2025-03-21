@@ -1,8 +1,9 @@
-from typing import AsyncGenerator, TypeVar, Callable, List, Generic, Any
+from typing import AsyncGenerator, TypeVar, Callable, List, Any
 
-T = TypeVar('T')
-U = TypeVar('U')
-V = TypeVar('V')
+T = TypeVar("T")
+U = TypeVar("U")
+V = TypeVar("V")
+
 
 class Pipeline:
     """
@@ -14,9 +15,14 @@ class Pipeline:
     def __init__(self, source: AsyncGenerator[Any, None]):
         """Initialize the pipeline with a source async generator."""
         self.source = source
-        self.steps: List[Callable[[AsyncGenerator[Any, None]], AsyncGenerator[Any, None]]] = []
+        self.steps: List[
+            Callable[[AsyncGenerator[Any, None]], AsyncGenerator[Any, None]]
+        ] = []
 
-    def add_step(self, transform: Callable[[AsyncGenerator[Any, None]], AsyncGenerator[Any, None]]):
+    def add_step(
+        self,
+        transform: Callable[[AsyncGenerator[Any, None]], AsyncGenerator[Any, None]],
+    ):
         """
         Add a transformation step to the pipeline.
 

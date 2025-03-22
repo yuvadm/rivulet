@@ -1,6 +1,13 @@
 # Rivulet
 
-Lightweight asynchronous data streams.
+Lightweight building blocks for asynchronous data streams. Provides:
+
+- [x] **Pipeline**: An asynchronous processing chain that connects a data source to a series of transformation steps.
+- [x] **Batch**: Accumulates individual stream items into batches of size `N` or when a timeout is reached.
+- [ ] **RateLimit**: Controls the flow rate of items through the pipeline by enforcing maximum items per time period constraints.
+- [ ] **Parallel**: Executes arbitary steps concurrently across multiple items.
+- [ ] **Join**: Combines multiple data streams into a single unified output stream.
+- [ ] **Cache**: Stores previously processed results to shortcircuit pipeline steps.
 
 ## Installation
 
